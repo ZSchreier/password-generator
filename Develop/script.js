@@ -16,7 +16,13 @@ var numChoice;
 var symbols = "!@#$%^&*()-+[];,.<>/?{}\|";
 var symChoice;
 
-var chosenPassword;
+var options = [];
+var selected;
+var chosenPassword = [];
+
+function generateRandomNumber(min, max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 function giveLength(){
   passLength = prompt("Give me a password length (pick between 8-128 characters please):")
@@ -41,24 +47,61 @@ function confirmNumber(){
 function confirmSymbol(){
   symChoice = confirm(`Would you like to use symbols/special characters in your password?`);
 }
+function confirmGrabber(){
+  confirmLower();
+  confirmUpper();
+  confirmNumber();
+  confirmSymbol();
+  optionChecker();
+}
+
+function optionChecker(){
+  if(!lowChoice && !upperChoice && !numChoice && !symChoice){
+    alert(`Um... you haven't left me with any characters to choose from. Please click "OK" for at least one of these options: lowercase letters, uppercase letters, numbers, symbols/special characters`);
+    confirmGrabber();
+  }else {
+    optionMaker();
+  }
+}
+
+function optionMaker(){
+  if(lowChoice){
+    options.push(lowercase);
+  }
+  if(upperChoice){
+    options.push(uppercase);
+  }
+  if(numChoice){
+    options.push(numbers);
+  }
+  if(symChoice){
+    options.push(symbols);
+  }
+}
+
+function optionSelector(){
+  selected = generateRandomNumber(0, options.length - 1);
+}
+
+// function randomPick(){
+//   for(x=0; x < passLength; x++){
+//     optionSelector();
+//     chosenPassword.push()
+//   }
+// }
 
 
 
-confirmLower();
-confirmUpper();
-confirmNumber();
-confirmSymbol();
+
+giveLength();
+confirmGrabber();
 
 console.log(lowChoice);
 console.log(upperChoice);
 console.log(numChoice);
 console.log(symChoice);
 
-
-
-
-
-
+console.log(options);
 
 
 // Write password to the #password input
