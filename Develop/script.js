@@ -17,7 +17,9 @@ var symbols = "!@#$%^&*()-+[];,.<>/?{}\|";
 var symChoice;
 
 var options = [];
-var selected;
+var optionSelected;
+var characterSelected;
+var chosenCharacter;
 var chosenPassword = [];
 
 function generateRandomNumber(min, max){
@@ -80,28 +82,39 @@ function optionMaker(){
 }
 
 function optionSelector(){
-  selected = generateRandomNumber(0, options.length - 1);
+  optionSelected = generateRandomNumber(0, options.length - 1);
 }
 
-// function randomPick(){
-//   for(x=0; x < passLength; x++){
-//     optionSelector();
-//     chosenPassword.push()
-//   }
-// }
+function pickCharacter(){
+  var location = options[optionSelected]
+  characterSelected = generateRandomNumber(0, options[optionSelected].length-1);
+  console.log(characterSelected);
+  chosenCharacter = location[characterSelected];
+  console.log(chosenCharacter);
+}
+
+function randomPick(){
+  for(x=0; x < passLength; x++){
+    optionSelector();
+    pickCharacter();
+    chosenPassword.push(chosenCharacter);
+  }
+}
 
 
 
 
 giveLength();
 confirmGrabber();
+randomPick();
+alert(`The password is ${chosenPassword.join("")}`);
 
-console.log(lowChoice);
-console.log(upperChoice);
-console.log(numChoice);
-console.log(symChoice);
+// console.log(lowChoice);
+// console.log(upperChoice);
+// console.log(numChoice);
+// console.log(symChoice);
 
-console.log(options);
+// console.log(options);
 
 
 // Write password to the #password input
